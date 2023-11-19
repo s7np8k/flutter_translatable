@@ -12,11 +12,11 @@ This Dart CLI script is designed to extract all strings from Dart source files a
 
 - [x] **String extraction**: Extraction of both single and double-quoted strings from Dart files.
 
-- [ ] **Export from multiple files**: Ability to process and export strings from multiple Dart files in a directory.
+- [x] **Export from multiple files**: Ability to process and export strings from multiple Dart files in a directory.
 
 - [ ] **CLI Parameter for output directory**: Added a CLI parameter to specify the output directory for exported JSON files.
 
-- [ ] **Multiple JSON export**: Add support for exporting strings to multiple JSON files at once for different languages (e.g., de, es, pt).
+- [ ] **Multiple JSON export**: Add support for exporting strings to multiple JSON files at once for different languages (e.g. `output-to=de,es,pt`).
 
 - [ ] **Verbose mode**: Introduce a verbose mode for more detailed output during the extraction process.
 
