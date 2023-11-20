@@ -3,11 +3,10 @@ import 'package:args/args.dart';
 
 void main(List<String> arguments) {
   final argParser = ArgParser()
-    ..addOption('output', abbr: 'o', defaultsTo: 'strings.json');
+    ..addOption('output-to', defaultsTo: 'strings');
 
   final argResults = argParser.parse(arguments);
+  final output = argResults['output-to'];
 
-  final outputFile = argResults['output'];
-
-  FlutterTranslatable.extractStrings(outputFile);
+  FlutterTranslatable.extractStrings(output);
 }

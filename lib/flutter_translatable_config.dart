@@ -1,6 +1,7 @@
 // List of file paths locations for processing.
 const List<String> inputPaths = [
-  './lib',
+  './test_dir',
+  './test_dir2',
 ];
 
 // String representing the output directory for processed results.
