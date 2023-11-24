@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter_translatable/flutter_translatable_config.dart';
 import 'dart:io';
 
@@ -28,21 +30,21 @@ class FlutterTranslatable {
     }
   }
 
-  static void _writeToJson(String filename, List extractedStrings) {
+  static void _writeToJson(String filename, List extractedStrings, bool emptyValues) {
     String file = '$filename.json';
     final jsonFile = File('$outputPath/$file');
     jsonFile.writeAsStringSync('{\n');
     for (var extractedString in extractedStrings) {
       if (extractedString != null) {
         jsonFile.writeAsStringSync(
-            '  "$extractedString": "${makeValueEmpty ? '' : extractedString}"${extractedStrings.last == extractedString ? '' : ','}\n',
+            '  "$extractedString": "${emptyValues ? '' : extractedString}"${extractedStrings.last == extractedString ? '' : ','}\n',
             mode: FileMode.append);
       }
     }
     jsonFile.writeAsStringSync('}\n', mode: FileMode.append);
   }
 
-  static Future<void> extractStrings(String output) async {
+  static Future<void> extractStrings(String output, bool emptyValues) async {
     List<String> outputFiles = output.split(',');
     var filesContents = await readDartFilesInDirectories();
     // Extract the string inside single or double quotes
@@ -61,7 +63,7 @@ class FlutterTranslatable {
     extractedStrings = extractedStrings.toSet().toList();
 
     for (String outputFile in outputFiles) {
-      _writeToJson(outputFile, extractedStrings);
+      _writeToJson(outputFile, extractedStrings, emptyValues);
     }
   }
 }

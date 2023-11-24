@@ -3,10 +3,12 @@ import 'package:args/args.dart';
 
 void main(List<String> arguments) {
   final argParser = ArgParser()
-    ..addOption('output-to', defaultsTo: 'strings');
+    ..addOption('output-to', defaultsTo: 'strings')
+    ..addOption('empty-values', defaultsTo: 'false');
 
   final argResults = argParser.parse(arguments);
   final output = argResults['output-to'];
+  final emptyValues = bool.parse(argResults['empty-values'], caseSensitive: false);
 
-  FlutterTranslatable.extractStrings(output);
+  FlutterTranslatable.extractStrings(output, emptyValues);
 }
