@@ -5,7 +5,7 @@ void main(List<String> arguments) {
   final argParser = ArgParser()
     ..addOption('output-to', defaultsTo: 'strings')
     ..addOption('empty-values', defaultsTo: 'false')
-    ..addOption('excluded-strings', defaultsTo: 'false');
+    ..addOption('excluded-strings', defaultsTo: '');
 
   final argResults = argParser.parse(arguments);
   final output = argResults['output-to'];
