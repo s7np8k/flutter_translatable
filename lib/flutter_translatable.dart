@@ -30,7 +30,8 @@ class FlutterTranslatable {
     }
   }
 
-  static void _writeToJson(String filename, List extractedStrings, bool emptyValues) {
+  static void _writeToJson(
+      String filename, List extractedStrings, bool emptyValues) {
     String file = '$filename.json';
     final jsonFile = File('$outputPath/$file');
     jsonFile.writeAsStringSync('{\n');
@@ -44,8 +45,10 @@ class FlutterTranslatable {
     jsonFile.writeAsStringSync('}\n', mode: FileMode.append);
   }
 
-  static Future<void> extractStrings(String output, bool emptyValues) async {
+  static Future<void> extractStrings(
+      String output, bool emptyValues, String excludedStringsArg) async {
     List<String> outputFiles = output.split(',');
+    List<String> excludedStringsArgList = excludedStringsArg.split(',');
     var filesContents = await readDartFilesInDirectories();
     // Extract the string inside single or double quotes
     final regex = RegExp(r'''(?:'([^']*)'|"([^"]*)")''', unicode: true);
@@ -57,8 +60,10 @@ class FlutterTranslatable {
       extractedStrings = [...extractedStrings, ...extracted];
     }
     // Remove strings defined by excludedStrings list
-    extractedStrings.removeWhere((element) => excludedStrings
-        .any((value) => element!.contains(value) || element.isEmpty));
+    extractedStrings.removeWhere((element) => [
+          ...excludedStrings,
+          ...excludedStringsArgList,
+        ].any((value) => element!.contains(value) || element.isEmpty));
     // Remove duplicates
     extractedStrings = extractedStrings.toSet().toList();
 
